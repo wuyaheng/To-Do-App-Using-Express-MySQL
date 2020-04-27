@@ -1,0 +1,56 @@
+<nav class="navbar navbar-light bg-warning">
+  <a class="navbar-brand text-white" href="#">Just Do It</a>
+</nav>
+
+
+<div class="container-fluid">
+<div class="row mt-3">
+
+<div class="col-md-3">
+
+<form id="createtodo" class="mt-5">
+    <textarea name="todo" placeholder="new task" rows="1" type="text" class="form-control p-2"></textarea>
+    <button type="submit" class="btn btn-outline-warning mt-2"><i class="fas fa-save pr-2"></i>Add</button>
+</form>
+</div>
+
+<div class="col-md-9">
+<h3 class="text-center">To do list</h3>
+<ul>
+{{#each todos}}
+<li class="list-group-item list-group-item-warning">{{this.todo}}
+    <i data-todoid="{{this.id}}" class="deltodo float-right fas fa-trash-alt pt-1"></i>
+</li>
+{{/each}}
+</ul>
+</div>
+</div>
+</div>
+<script>
+    $("#createtodo").on("submit", function(event) {
+        event.preventDefault();
+        var newTodo = {
+            todo: $("#createtodo [name=todo]").val().trim()
+        }
+
+        $.ajax("api/todos", {
+            type: "POST",
+            data: newTodo
+        }).then(function() {
+            location.reload();
+        });
+    });
+
+    $(".deltodo").on("click", function(event) {
+        var id = $(this).data("todoid");
+
+        $.ajax("api/todos" + id, {
+            type: "DELETE"
+        }).then(function() {
+            location.reload();
+        })
+
+    })
+
+
+</script>
