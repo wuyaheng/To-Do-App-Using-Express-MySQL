@@ -1,24 +1,32 @@
-<nav class="navbar navbar-light bg-warning">
-  <a class="navbar-brand text-white" href="#">Just Do It</a>
+<nav class="navbar navbar-light bg-primary">
+  <a class="navbar-brand text-white" href="#">To do list</a>
 </nav>
 
 
 <div class="container-fluid">
+
+
 <div class="row mt-3">
+<div class="col-md-12">
 
-<div class="col-md-3">
-
-<form id="createtodo" class="mt-5">
-    <textarea name="todo" placeholder="new task" rows="1" type="text" class="form-control p-2"></textarea>
-    <button type="submit" class="btn btn-outline-warning mt-2"><i class="fas fa-save pr-2"></i>Add</button>
+<form id="createtodo">
+<div class="input-group mb-3">
+  <input name="todo" type="text" class="form-control" autocomplete="off" placeholder="new task" aria-label="new task" aria-describedby="new task">
+  <div class="input-group-append">
+    <button class="btn btn-outline-primary" type="submit"><i class="fas fa-save pr-2"></i>Add</button>
+  </div>
+</div>
 </form>
+
+</div>
 </div>
 
-<div class="col-md-9">
-<h3 class="text-center">To do list</h3>
+<div class="row">
+<div class="col-md-12">
+{{!-- <h3 class="text-center">To do list</h3> --}}
 <ul>
 {{#each todos}}
-<li class="list-group-item list-group-item-warning">{{this.todo}}
+<li class="list-group-item list-group-item-primary">{{this.todo}}
     <i data-todoid="{{this.id}}" class="deltodo float-right fas fa-trash-alt pt-1"></i>
 </li>
 {{/each}}
